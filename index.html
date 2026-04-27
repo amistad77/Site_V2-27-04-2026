@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio d'artiste 3D — Photo, 3D, FX & Motion design." />
+  <meta name="theme-color" content="#F2EEE5" />
+  <title>Studio — Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF4D1A'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ============ LOADER ============ -->
+  <div class="loader" id="loader">
+    <div class="loader__inner">
+      <div class="loader__logo"><span id="loaderLogo">Studio</span></div>
+      <div class="loader__bar"><div class="loader__progress"></div></div>
+      <div class="loader__count"><span id="loaderCount">00</span> / 100</div>
+      <div class="loader__words" aria-hidden="true">
+        <span>photo</span><span>3D</span><span>fx</span><span>motion</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TIDAL CURSOR CANVAS (ripples) ============ -->
+  <canvas class="tidal" id="tidal" aria-hidden="true"></canvas>
+
+  <!-- ============ PAGE TRANSITION OVERLAY ============ -->
+  <div class="page-transition" id="pageTransition">
+    <div class="page-transition__panel"></div>
+    <div class="page-transition__label" id="ptLabel">Studio</div>
+  </div>
+
+  <!-- ============ CURSOR ============ -->
+  <div class="cursor" id="cursor">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+    <div class="cursor__label" id="cursorLabel"></div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#/home" class="nav__logo" data-route="home" data-magnetic>
+      <span class="nav__logo-mark">✦</span>
+      <span id="navName">Studio</span>
+      <span class="nav__logo-sep"></span>
+      <span class="nav__logo-sub" id="navStudio">artist</span>
+    </a>
+
+    <nav class="nav__tabs" id="navTabs">
+      <a href="#/home" class="nav__tab" data-route="home">
+        <span class="nav__tab-num">01</span><span class="nav__tab-label">Home</span>
+      </a>
+      <a href="#/work" class="nav__tab" data-route="work">
+        <span class="nav__tab-num">02</span><span class="nav__tab-label">Work</span>
+      </a>
+      <a href="#/contact" class="nav__tab" data-route="contact">
+        <span class="nav__tab-num">03</span><span class="nav__tab-label">Contact</span>
+      </a>
+      <span class="nav__tab-indicator" id="navIndicator"></span>
+    </nav>
+
+    <div class="nav__clock">
+      <span class="nav__clock-dot"></span>
+      <span id="navClock">--:--</span>
+      <span class="nav__clock-sep">·</span>
+      <span id="navTz">PAR</span>
+    </div>
+  </header>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ============ MAIN (multi-pages) ============ -->
+  <main id="main">
+
+    <!-- ================================================================ -->
+    <!--   PAGE : HOME                                                    -->
+    <!-- ================================================================ -->
+    <div class="page page--home" data-page="home">
+
+      <!-- ============ HERO WITH LENS ============ -->
+      <section class="hero" id="home">
+        <!-- Animated fluid gradient waves (SVG goo) -->
+        <div class="hero__waves" aria-hidden="true">
+          <svg class="wave-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="70" />
+                <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" />
+              </filter>
+              <radialGradient id="blobA" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FF4D1A" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#FF4D1A" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="blobB" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#2D2AF0" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#2D2AF0" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="blobC" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#D93A5A" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#D93A5A" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="blobD" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#F9C846" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#F9C846" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <g id="blobGroup" filter="url(#goo)">
+              <circle class="blob blob--a" r="320" fill="url(#blobA)"/>
+              <circle class="blob blob--b" r="300" fill="url(#blobB)"/>
+              <circle class="blob blob--c" r="340" fill="url(#blobC)"/>
+              <circle class="blob blob--d" r="280" fill="url(#blobD)"/>
+            </g>
+          </svg>
+          <div class="hero__waves-grain"></div>
+        </div>
+
+        <!-- Corner metadata -->
+        <div class="hero__corner hero__corner--tl">
+          <span class="hero__corner-dot"></span>
+          <span class="hero__corner-text">A visual studio</span>
+        </div>
+        <div class="hero__corner hero__corner--tr">
+          <span class="hero__corner-label">EST 2020</span>
+        </div>
+
+        <!-- Hero title with magnifier lens effect -->
+        <div class="hero__center">
+          <span class="hero__eyebrow" id="heroEyebrow">Index / 2026</span>
+
+          <div class="hero__lens-wrap" id="lensWrap">
+            <h1 class="hero__title hero__title--base" aria-hidden="false">
+              <span class="hero__title-line" id="heroLine1">We shape</span>
+              <span class="hero__title-line" id="heroLine2">the living,</span>
+              <span class="hero__title-line" id="heroLine3">frame by frame.</span>
+            </h1>
+            <h1 class="hero__title hero__title--reveal" aria-hidden="true">
+              <span class="hero__title-line" id="heroSecret1">Nous sculptons</span>
+              <span class="hero__title-line" id="heroSecret2">le vivant,</span>
+              <span class="hero__title-line" id="heroSecret3">image par image.</span>
+            </h1>
+            <div class="hero__lens" id="lens"></div>
+          </div>
+
+          <span class="hero__hint" id="heroHint">
+            <span class="hero__hint-icon">◎</span>
+            <span>Hover the words</span>
+          </span>
+        </div>
+
+        <!-- Bottom metadata strip -->
+        <div class="hero__strip">
+          <div class="hero__strip-col">
+            <span id="meta1a">Based in Paris</span>
+            <span id="meta1b">Roaming the wild</span>
+          </div>
+          <div class="hero__strip-col">
+            <span id="meta2a">Visual-driven</span>
+            <span id="meta2b">3D studio</span>
+          </div>
+          <div class="hero__strip-col">
+            <span id="meta3a">Photo, 3D, FX</span>
+            <span id="meta3b">& motion design</span>
+          </div>
+          <div class="hero__strip-scroll">
+            <span>Scroll</span>
+            <span class="hero__strip-arrow">↓</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- MARQUEE -->
+      <section class="marquee" aria-hidden="true">
+        <div class="marquee__track" id="marqueeTrack"></div>
+      </section>
+
+      <!-- ============ SHOWCASE — FEATURED CATEGORIES ============ -->
+      <section class="showcase">
+        <div class="showcase__head">
+          <span class="showcase__eyebrow">— Categories / 04</span>
+          <h2 class="showcase__title" data-reveal><span>Quatre <em>territoires</em>,<br>une même <em>obsession</em>.</span></h2>
+        </div>
+        <div class="showcase__rail" id="showcaseRail">
+          <!-- Injected by JS -->
+        </div>
+        <div class="showcase__hint">
+          <span>↤</span>
+          <span>Glissez pour explorer</span>
+          <span>↦</span>
+        </div>
+      </section>
+
+      <!-- MANIFESTO -->
+      <section class="manifesto">
+        <div class="manifesto__inner">
+          <span class="manifesto__eyebrow">Manifesto / 2026</span>
+          <p class="manifesto__text" id="manifestoText" data-reveal>
+            <span>A different <em>creative</em> approach.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="stats">
+        <ul class="stats__list" id="statsList">
+          <li><span class="stats__num" data-counter="48">00</span><span class="stats__label">Projets livrés</span></li>
+          <li><span class="stats__num" data-counter="6">0</span><span class="stats__label">Années d'exploration</span></li>
+          <li><span class="stats__num" data-counter="14">00</span><span class="stats__label">Outils maîtrisés</span></li>
+          <li><span class="stats__num" data-counter="32">00</span><span class="stats__label">Clients heureux</span></li>
+        </ul>
+      </section>
+
+      <!-- CTA vers Work -->
+      <section class="home-cta">
+        <a href="#/work" class="home-cta__link" data-route="work" data-morph="See the work" data-morph-alt="Voir le travail">
+          <span class="home-cta__eyebrow">Next →</span>
+          <span class="home-cta__title">See the <em>work</em></span>
+          <span class="home-cta__arrow">⟶</span>
+        </a>
+      </section>
+    </div>
+
+    <!-- ================================================================ -->
+    <!--   PAGE : WORK                                                    -->
+    <!-- ================================================================ -->
+    <div class="page page--work" data-page="work">
+
+      <!-- Work header -->
+      <section class="page-head">
+        <div class="page-head__inner">
+          <span class="page-head__eyebrow">— Selected / 2020 — 2026</span>
+          <h1 class="page-head__title">
+            <span class="page-head__title-row"><em>Work</em></span>
+            <span class="page-head__title-row page-head__title-row--sm">Photo · 3D · FX · Motion</span>
+          </h1>
+          <p class="page-head__desc">
+            Quatre territoires, une même obsession : faire vivre l'image.
+            Photographie, 3D, effets visuels, motion design — chaque pièce est une fenêtre sur un monde qui respire.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ FILTER BAR (sticky) ============ -->
+      <div class="filterbar" id="filterbar">
+        <div class="filterbar__inner">
+          <div class="filterbar__pills" id="filterPills">
+            <!-- Injected by JS: All, Photo, 3D, FX, Motion -->
+          </div>
+          <div class="filterbar__count">
+            <span class="filterbar__count-num" id="filterCount">0</span>
+            <span class="filterbar__count-label">projets</span>
+          </div>
+        </div>
+        <span class="filterbar__indicator" id="filterIndicator" aria-hidden="true"></span>
+      </div>
+
+      <!-- ============ PROJECTS GRID (filterable) ============ -->
+      <section class="works">
+        <div class="works__grid" id="worksGrid">
+          <!-- Injected by JS -->
+        </div>
+        <div class="works__empty" id="worksEmpty" hidden>
+          <span class="works__empty-icon">◯</span>
+          <p>Aucun projet dans cette catégorie pour l'instant.</p>
+        </div>
+      </section>
+
+      <!-- CTA vers Contact -->
+      <section class="home-cta">
+        <a href="#/contact" class="home-cta__link" data-route="contact" data-morph="Let's talk" data-morph-alt="Échangeons">
+          <span class="home-cta__eyebrow">Next →</span>
+          <span class="home-cta__title">Let's <em>talk</em></span>
+          <span class="home-cta__arrow">⟶</span>
+        </a>
+      </section>
+    </div>
+
+    <!-- ================================================================ -->
+    <!--   PAGE : CONTACT                                                 -->
+    <!-- ================================================================ -->
+    <div class="page page--contact" data-page="contact">
+
+      <!-- ABOUT -->
+      <section class="about" id="about">
+        <div class="about__grid">
+          <span class="about__eyebrow">Studio / About</span>
+          <div>
+            <h2 class="about__title" data-reveal><span>The <em>living</em> image,<br>crafted by hand.</span></h2>
+            <p class="about__body" id="aboutBody">
+              Studio visuel basé en France, je façonne des images entre le réel et le virtuel.
+            </p>
+            <ul class="about__facts" id="aboutFacts"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="contact" id="contact">
+        <span class="contact__eyebrow">Get in touch</span>
+        <h2 class="contact__title">
+          <span data-reveal><span>Let's make</span></span>
+          <span data-reveal><span><em>something</em></span></span>
+          <span data-reveal><span>together.</span></span>
+        </h2>
+        <a href="#" class="contact__mail" id="contactMail" data-magnetic>hello@votresite.com</a>
+        <div class="contact__socials" id="contactSocials"></div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div>© <span id="footerYear"></span> — <span id="footerName">Studio</span></div>
+      <div class="footer__center">
+        <button class="footer__toggle" id="ripplesToggle" aria-pressed="true" data-magnetic>
+          <span class="footer__toggle-dot"></span>
+          <span>Ripples</span>
+        </button>
+      </div>
+      <div id="footerLine">Crafted with intent ✦</div>
+    </footer>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose">✕</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev">←</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext">→</button>
+    <div class="lightbox__inner" id="lightboxInner"></div>
+    <div class="lightbox__caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- PROJECT DETAIL -->
+  <div class="project-detail" id="projectDetail" aria-hidden="true">
+    <button class="project-detail__close" id="projectClose"><span></span><span></span></button>
+    <div class="project-detail__scroll" id="projectScroll"></div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

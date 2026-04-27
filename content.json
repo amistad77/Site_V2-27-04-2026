@@ -1,0 +1,329 @@
+{
+  "artist": {
+    "name": "Amistad",
+    "studio": "3D artiste",
+    "tagline": "Photo · 3D · FX · Motion",
+    "hero": {
+      "eyebrow": "Index / 2026",
+      "mainLine1": "Toujours entrain",
+      "mainLine2": "de",
+      "mainLine3": "créer",
+      "secretLine1": "Même à ",
+      "secretLine2": "2 heures ",
+      "secretLine3": "du matin",
+      "hint": "Hover the words"
+    },
+    "meta": {
+      "col1Line1": "Based in Paris",
+      "col1Line2": "Roaming the wild",
+      "col2Line1": "Visual-driven",
+      "col2Line2": "3D studio",
+      "col3Line1": "Photo, 3D, FX",
+      "col3Line2": "& motion design"
+    },
+    "intro": "Je façonne des images hybrides où la photographie animalière rencontre la 3D, les FX et le motion design. Chaque projet est un monde qui respire — un regard capté dans la nature, prolongé pixel par pixel.",
+    "about": "Artiste 3D basé en France, je compose des images entre le réel et le virtuel : faire surgir des créatures de la lumière, sculpter le mouvement, mettre en scène l'invisible. J'ai collaboré avec des studios, agences et marques pour donner corps à leurs idées.",
+    "email": "bdumoulin.pro@gmail.com",
+    "location": "Paris, FR",
+    "availability": "disponible pour des projets",
+    "manifesto": "A different\n*creative* approach\nto the living image.",
+    "cornerTagline": "A visual studio",
+    "footerLine": "Crafted with intent ✦",
+    "social": [
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/"
+      },
+      {
+        "label": "ArtStation",
+        "url": "https://artstation.com/"
+      },
+      {
+        "label": "Vimeo",
+        "url": "https://vimeo.com/"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/"
+      }
+    ],
+    "marquee": [
+      "Available for projects",
+      "Blender",
+      "Houdini",
+      "After Effects",
+      "Cinema 4D",
+      "Nuke",
+      "Wildlife photography",
+      "Direction artistique"
+    ]
+  },
+  "sections": {
+    "photo": {
+      "id": "photo",
+      "label": "Photographie",
+      "labelShort": "Photo",
+      "number": "01",
+      "title": "Capturing / the living",
+      "subtitle": "Photographie animalière & nature",
+      "description": "Patience, lumière, instant. La photographie est le premier regard — un cadre saisi dans la nature, retenu pour qu'il continue de respirer dans nos écrans.",
+      "accent": "#FF5633",
+      "projects": [
+        {
+          "id": "ph-01",
+          "title": "Aurore sauvage",
+          "client": "Personnel",
+          "year": "2025",
+          "role": "Photographie · Direction",
+          "description": "Un renard polaire au petit matin, immergé dans un brouillard rose-orangé. Une heure d'attente pour quelques secondes de grâce.",
+          "tags": [
+            "Wildlife",
+            "Aube",
+            "Editorial"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=1600&q=80",
+            "https://images.unsplash.com/photo-1485470733441-d58ce8d59078?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "ph-02",
+          "title": "L'œil du lynx",
+          "client": "Editorial",
+          "year": "2024",
+          "role": "Photo · Portrait",
+          "description": "Série de portraits photographiques de lynx en pleine forêt jurassienne, publiée dans une revue print indépendante.",
+          "tags": [
+            "Editorial",
+            "Portrait",
+            "Print"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "ph-03",
+          "title": "Plumage sombre",
+          "client": "Personnel",
+          "year": "2024",
+          "role": "Photo nature",
+          "description": "Étude photographique de la chouette effraie. Détails de plumes, jeux de contraste avec la nuit.",
+          "tags": [
+            "Nuit",
+            "Nature",
+            "Macro"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "ph-04",
+          "title": "Forêt fantôme",
+          "client": "Expo collective",
+          "year": "2023",
+          "role": "Photographie",
+          "description": "Cerfs photographiés à l'aube dans un brouillard épais. Présenté lors d'une expo collective à Paris.",
+          "tags": [
+            "Expo",
+            "Brume",
+            "Nature"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1484406566174-9da000fda645?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1484406566174-9da000fda645?w=1600&q=80"
+          ]
+        }
+      ]
+    },
+    "3d": {
+      "id": "3d",
+      "label": "3D & Sculpting",
+      "labelShort": "3D",
+      "number": "02",
+      "title": "Sculpting / the imagined",
+      "subtitle": "3D · Modeling · Rendering",
+      "description": "Donner volume aux idées. Modélisation, sculpting, rendu — chaque pièce est un monde fermé que la lumière ouvre.",
+      "accent": "#2D2AF0",
+      "projects": [
+        {
+          "id": "td-01",
+          "title": "Plumage numérique",
+          "client": "Personnel",
+          "year": "2025",
+          "role": "Modeling · Lookdev",
+          "description": "Étude de plumes simulées en Houdini, lookdev en Redshift. Une chouette numérique entièrement fabriquée à la main, plume par plume.",
+          "tags": [
+            "Houdini",
+            "Redshift",
+            "Lookdev"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1620207418302-439b387441b0?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1620207418302-439b387441b0?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "td-02",
+          "title": "Architecture liquide",
+          "client": "Personnel",
+          "year": "2024",
+          "role": "3D · Concept",
+          "description": "Série de structures architecturales modélisées comme des fluides figés. Exploration formelle entre vivant et minéral.",
+          "tags": [
+            "Blender",
+            "Concept",
+            "Architecture"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "td-03",
+          "title": "Forêt augmentée",
+          "client": "Studio · Direction",
+          "year": "2024",
+          "role": "3D · Lumière",
+          "description": "Environnement 3D photoréaliste mêlé à des plates photographiques. Lumières volumétriques sculptées en Nuke.",
+          "tags": [
+            "Cinema 4D",
+            "Nuke",
+            "Volumetric"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600&q=80"
+          ]
+        }
+      ]
+    },
+    "fx": {
+      "id": "fx",
+      "label": "FX & Simulations",
+      "labelShort": "FX",
+      "number": "03",
+      "title": "Making / the invisible visible",
+      "subtitle": "Visual effects & simulations",
+      "description": "Fumée, feu, particules, destructions, fluides — transformer des équations en émotions. Le FX, c'est donner un corps à ce qui n'existe pas.",
+      "accent": "#E63946",
+      "projects": [
+        {
+          "id": "fx-01",
+          "title": "Combustion",
+          "client": "Publicité",
+          "year": "2025",
+          "role": "FX Lead · Compositing",
+          "description": "Simulation de combustion hyper stylisée pour un spot publicitaire. 12 000 frames, 3 TB de cache.",
+          "tags": [
+            "Houdini",
+            "Pyro",
+            "Nuke"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "fx-02",
+          "title": "Fluides",
+          "client": "Clip musical",
+          "year": "2024",
+          "role": "FX · Rendu",
+          "description": "Simulations FLIP sculptées à la main pour accompagner la direction artistique d'un clip.",
+          "tags": [
+            "FLIP",
+            "Clip",
+            "Redshift"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1530053969600-caed2596d242?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1530053969600-caed2596d242?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "fx-03",
+          "title": "Éclats",
+          "client": "Court-métrage",
+          "year": "2024",
+          "role": "Destruction · FX",
+          "description": "Destruction procédurale d'une architecture en verre pour un court-métrage expérimental.",
+          "tags": [
+            "Destruction",
+            "Procedural"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80"
+          ]
+        }
+      ]
+    },
+    "motion": {
+      "id": "motion",
+      "label": "Motion Design",
+      "labelShort": "Motion",
+      "number": "04",
+      "title": "Movement / as language",
+      "subtitle": "Motion design & narratives",
+      "description": "Chaque pixel qui bouge raconte quelque chose. Du logo vivant à la narration cinématique — composer des pièces qui transmettent, séduisent, captivent.",
+      "accent": "#F9C846",
+      "projects": [
+        {
+          "id": "mo-01",
+          "title": "Lumen — brand motion",
+          "client": "Lumen Studio",
+          "year": "2025",
+          "role": "Direction · Animation",
+          "description": "Identité motion complète pour un studio de design : logo animé, transitions, habillage réseaux.",
+          "tags": [
+            "Branding",
+            "After Effects"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "mo-02",
+          "title": "Orbites",
+          "client": "Conférence",
+          "year": "2024",
+          "role": "Motion · 3D",
+          "description": "Séquence d'ouverture en motion 3D pour une conférence autour de l'astrophysique.",
+          "tags": [
+            "3D Motion",
+            "Cinema 4D"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80"
+          ]
+        },
+        {
+          "id": "mo-03",
+          "title": "Formes libres",
+          "client": "Personnel",
+          "year": "2024",
+          "role": "Expérimental",
+          "description": "Loops abstraits explorant les textures, le rythme et la matière en motion design.",
+          "tags": [
+            "Loops",
+            "Abstract"
+          ],
+          "thumbnail": "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1400&q=80",
+          "gallery": [
+            "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1600&q=80"
+          ]
+        }
+      ]
+    }
+  }
+}

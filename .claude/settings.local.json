@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python:*)",
+      "Bash(where ffmpeg:*)",
+      "Bash(python -c \"import cv2; print\\('ok'\\)\")",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(python --version)",
+      "Bash(git --version)",
+      "PowerShell(claude mcp add magic --scope user --env API_KEY=\"f749f3ea33f73aa2c378e3f59b0ce13c039500e6d2c3f69ab31b620a8a33cd45\" -- npx -y \"@21st-dev/magic@latest\")",
+      "PowerShell($paths = @\\(\"$env:ProgramFiles\\\\nodejs\\\\npx.cmd\", \"$env:APPDATA\\\\npm\\\\npx.cmd\", \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\\\\npx.cmd\"\\); $paths | ForEach-Object { if \\(Test-Path $_\\) { Write-Output \"FOUND: $_\" } })",
+      "PowerShell($claudeCmd = \"$env:APPDATA\\\\npm\\\\claude.cmd\"; if \\(Test-Path $claudeCmd\\) { Write-Output \"FOUND: $claudeCmd\" } else { Write-Output \"NOT FOUND - claude CLI is not installed via npm\" })",
+      "PowerShell(Copy-Item \"$env:USERPROFILE\\\\.claude.json\" \"$env:USERPROFILE\\\\.claude.json.bak-mcp\" -Force; $configPath = \"$env:USERPROFILE\\\\.claude.json\"; $config = Get-Content $configPath -Raw | ConvertFrom-Json; $magic = [PSCustomObject]@{ type = \"stdio\"; command = \"npx\"; args = @\\(\"-y\", \"@21st-dev/magic@latest\"\\); env = [PSCustomObject]@{ API_KEY = \"f749f3ea33f73aa2c378e3f59b0ce13c039500e6d2c3f69ab31b620a8a33cd45\" } }; $mcpServers = [PSCustomObject]@{ magic = $magic }; $config | Add-Member -NotePropertyName mcpServers -NotePropertyValue $mcpServers -Force; \\($config | ConvertTo-Json -Depth 20\\) | Out-File $configPath -Encoding utf8 -NoNewline; Write-Output \"DONE - magic MCP added at user scope\")",
+      "Read(//c/Users/bapti/.claude/skills/ui-ux-pro-max/**)",
+      "Bash(python scripts/search.py \"portfolio artist 3D photography editorial premium creative\" --design-system -p \"Studio Portfolio\" -f markdown)",
+      "mcp__magic__21st_magic_component_inspiration",
+      "Bash(python -m http.server 8765)",
+      "Bash(curl -sI http://localhost:8765/)",
+      "Bash(curl -s http://localhost:8765/content.json)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('OK sections:', list\\(d['sections'].keys\\(\\)\\)\\)\")",
+      "Bash(pkill -f \"http.server 8765\")",
+      "Bash(python server.py)",
+      "Bash(curl -sf http://localhost:8765/ -o /dev/null)",
+      "Bash(curl -sf http://localhost:8765/content.json -o /dev/null)",
+      "Bash(curl -sf http://localhost:8765/assets/css/style.css -o /dev/null)",
+      "Bash(curl -sf http://localhost:8765/assets/js/app.js -o /dev/null)",
+      "Bash(curl -s http://localhost:8765/)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('Sections:', list\\(d['sections'].keys\\(\\)\\)\\); print\\('Total projects:', sum\\(len\\(s.get\\('projects',[]\\)\\) for s in d['sections'].values\\(\\)\\)\\)\")",
+      "Bash(curl -s http://localhost:8765/assets/js/app.js)",
+      "Bash(curl -s http://localhost:8765/assets/css/style.css)",
+      "Bash(taskkill -F -IM python.exe)",
+      "Bash(PYTHONIOENCODING=utf-8 PYTHONUTF8=1 python \"C:/Users/bapti/Desktop/IMPORTANT/SITE/mon-site/server.py\")",
+      "Bash(curl -s -X POST http://localhost:8765/save -H 'Content-Type: application/json' -d '{\"artist\":{\"name\":\"Test\"},\"sections\":{}}')",
+      "Bash(python -c \"import json; d=json.load\\(open\\('C:/Users/bapti/Desktop/IMPORTANT/SITE/mon-site/content.json'\\)\\); print\\('Name:', d.get\\('artist',{}\\).get\\('name'\\)\\)\")",
+      "Bash(taskkill -F -PID 33372)"
+    ]
+  }
+}
