@@ -341,7 +341,9 @@ def main():
         watcher_thread = threading.Thread(target=file_watcher, daemon=True)
         watcher_thread.start()
 
+    # Ouvre 2 onglets : le site, puis l'admin (decale pour ouvrir 2 onglets distincts)
     threading.Timer(0.8, lambda: webbrowser.open(url)).start()
+    threading.Timer(1.6, lambda: webbrowser.open(admin_url)).start()
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

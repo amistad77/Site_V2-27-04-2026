@@ -2,6 +2,16 @@
    ADMIN — éditeur du portfolio
    Modifie content.json en direct via le serveur local.
    ========================================================================== */
+
+/* --- Redirige automatiquement file:// vers http://localhost:8765 ---
+   L'admin a besoin du serveur Python pour fonctionner. Si l'utilisateur a
+   ouvert admin.html en double-cliquant sur le fichier (file://), on le
+   redirige sur le bon URL. */
+if (location.protocol === 'file:') {
+  const path = location.pathname.split(/[\\/]/).pop() || 'admin.html';
+  location.replace('http://localhost:8765/' + path + location.search + location.hash);
+}
+
 (() => {
   'use strict';
 

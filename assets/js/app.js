@@ -8,6 +8,15 @@
    - Reveal char-by-char
    - Magnetic / Morph CTAs
    ========================================================================== */
+
+/* --- Redirige automatiquement file:// vers http://localhost:8765 ---
+   Le site a besoin du serveur Python pour charger content.json. Si l'utilisateur
+   a ouvert index.html en double-cliquant (file://), on le redirige sur le bon URL. */
+if (location.protocol === 'file:') {
+  const path = location.pathname.split(/[\\/]/).pop() || 'index.html';
+  location.replace('http://localhost:8765/' + path + location.search + location.hash);
+}
+
 (() => {
   'use strict';
 
