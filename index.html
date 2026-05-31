@@ -38,28 +38,15 @@
       = 1.00      : l'intro est retirée, on arrive sur la home
   -->
   <section class="intro" id="intro" aria-label="Intro Baptiste Dumoulin">
-    <!-- Stage vidéo : grandit du format cinéma vers le plein écran -->
+    <!-- Stage vidéo : une seule vidéo plein écran (sortie en fondu) -->
     <div class="intro__stage" id="introStage">
-      <!-- Moitié GAUCHE : part vers la gauche au split -->
-      <div class="intro__half intro__half--left" id="introHalfLeft">
-        <video
-          class="intro__half-video"
-          id="introHalfVideoL"
-          src="assets/video/V02.mp4"
-          autoplay muted loop playsinline preload="auto"
-          disablepictureinpicture
-        ></video>
-      </div>
-      <!-- Moitié DROITE : part vers la droite -->
-      <div class="intro__half intro__half--right" id="introHalfRight">
-        <video
-          class="intro__half-video"
-          id="introHalfVideoR"
-          src="assets/video/V02.mp4"
-          autoplay muted loop playsinline preload="auto"
-          disablepictureinpicture
-        ></video>
-      </div>
+      <video
+        class="intro__video"
+        id="introVideo"
+        src="assets/video/V02.mp4"
+        autoplay muted loop playsinline preload="auto"
+        disablepictureinpicture
+      ></video>
       <!-- Voile sombre qui s'allège au fur et à mesure -->
       <div class="intro__veil" aria-hidden="true"></div>
     </div>
