@@ -184,7 +184,6 @@ if (location.protocol === 'file:') {
       window.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('scroll', onScroll);
-      clearInterval(syncTimer);
     }
 
     window.addEventListener('wheel', onWheel, { passive: false });
