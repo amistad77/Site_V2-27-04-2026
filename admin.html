@@ -313,20 +313,18 @@
 
       <label class="field"><span>Tags (séparés par des virgules)</span><input type="text" data-bind-arr="tags" /></label>
 
-      <div class="grid grid--2">
-        <div class="field">
-          <span>Image principale (vignette)</span>
-          <div class="img-picker" data-img="thumbnail">
-            <div class="img-picker__preview" data-preview></div>
-            <input type="text" data-bind="thumbnail" placeholder="assets/images/…" />
-            <button type="button" class="btn btn--ghost btn--sm" data-pick>Parcourir</button>
-          </div>
+      <div class="field">
+        <span>Image principale (vignette) <small>— la carte du projet dans la liste</small></span>
+        <div class="img-picker" data-img="thumbnail">
+          <div class="img-picker__preview" data-preview></div>
+          <input type="text" data-bind="thumbnail" placeholder="assets/images/…" />
+          <button type="button" class="btn btn--ghost btn--sm" data-pick>Parcourir</button>
         </div>
+      </div>
 
-        <div class="field">
-          <span>Galerie (une image par ligne)</span>
-          <textarea rows="3" data-bind-lines="gallery" placeholder="assets/images/img1.jpg&#10;assets/images/img2.jpg"></textarea>
-        </div>
+      <div class="field">
+        <span>Galerie du projet <small>— les images de la page « Voir le projet ». La 1ʳᵉ sert d'image d'en-tête.</small></span>
+        <div class="gallery-editor" data-gallery="gallery"></div>
       </div>
     </div>
   </template>
