@@ -91,14 +91,41 @@ Ce dossier contient tout votre site, votre éditeur et votre contenu.
 
 
 ──────────────────────────────────────────────────────────────
-  6.  ARRÊTER LE SERVEUR
+  6.  PUBLICATION EN LIGNE  (automatique)
+──────────────────────────────────────────────────────────────
+
+    Votre site est hébergé GRATUITEMENT sur GitHub Pages.
+
+    Adresse publique :
+        https://amistad77.github.io/Site_V2-27-04-2026/
+
+    ▸ Chaque fois que vous enregistrez dans l'éditeur (Ctrl+S),
+      le serveur pousse automatiquement les changements vers
+      GitHub. Le site en ligne se met à jour en ~30 secondes.
+
+    ▸ Vous n'avez RIEN à faire — c'est entièrement automatisé.
+
+    ◆ Première activation (à faire UNE seule fois) :
+      1. Allez sur https://github.com/amistad77/Site_V2-27-04-2026/settings/pages
+      2. Source : choisissez "GitHub Actions"
+      3. Sauvegardez — le premier déploiement démarre tout seul
+
+    ◆ Voir le statut d'un déploiement :
+      https://github.com/amistad77/Site_V2-27-04-2026/actions
+
+    ◆ Désactiver la publication auto :
+      Dans server.py, mettre AUTO_PUBLISH = False (ligne ~32)
+
+
+──────────────────────────────────────────────────────────────
+  7.  ARRÊTER LE SERVEUR
 ──────────────────────────────────────────────────────────────
 
     ▸ Fermez la fenêtre de commande, ou pressez Ctrl+C dedans.
 
 
 ──────────────────────────────────────────────────────────────
-  7.  SI ÇA NE MARCHE PAS
+  8.  SI ÇA NE MARCHE PAS
 ──────────────────────────────────────────────────────────────
 
     ◆ "Python n'est pas installé"

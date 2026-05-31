@@ -14,6 +14,7 @@ import mimetypes
 import os
 import re
 import socketserver
+import subprocess
 import sys
 import threading
 import time
@@ -28,6 +29,12 @@ UPLOADS_DIR = IMAGES_DIR / "uploads"
 
 ALLOWED_EXT = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".mp4", ".webm", ".mov", ".avif", ".svg"}
 
+# Auto-publication sur GitHub Pages
+AUTO_PUBLISH = True
+_publish_lock = threading.Lock()
+_publish_pending = threading.Event()
+_publish_timer = None
+
 
 def log(msg, color=""):
     colors = {
@@ -37,6 +44,71 @@ def log(msg, color=""):
     c = colors.get(color, "")
     e = colors["end"] if c else ""
     print(f"{c}{msg}{e}")
+
+
+def _git(*args, capture=True):
+    return subprocess.run(
+        ["git", *args],
+        cwd=str(ROOT),
+        capture_output=capture,
+        text=True,
+        check=False,
+    )
+
+
+def _do_publish():
+    """Commit + push toutes les modifications locales sur GitHub.
+    Appelee dans un thread de fond, throttlee (au plus 1 push toutes les 3 s)."""
+    if not AUTO_PUBLISH:
+        return
+    with _publish_lock:
+        try:
+            # Verifie qu'on est bien dans un repo git avec un remote
+            r = _git("rev-parse", "--is-inside-work-tree")
+            if r.returncode != 0:
+                log("  ⚠ pas un repo git, publication ignoree", "warn")
+                return
+            r = _git("remote", "get-url", "origin")
+            if r.returncode != 0 or not r.stdout.strip():
+                log("  ⚠ pas de remote 'origin', publication ignoree", "warn")
+                return
+
+            # Stage tout
+            _git("add", "-A")
+            # Y a-t-il quelque chose a commiter ?
+            r = _git("diff", "--cached", "--quiet")
+            if r.returncode == 0:
+                return  # rien a publier
+
+            msg = f"Mise a jour via admin — {time.strftime('%Y-%m-%d %H:%M:%S')}"
+            r = _git("commit", "-m", msg)
+            if r.returncode != 0:
+                log(f"  ⚠ git commit: {r.stderr.strip() or r.stdout.strip()}", "warn")
+                return
+
+            r = _git("push", "origin", "HEAD")
+            if r.returncode != 0:
+                log(f"  ⚠ git push: {r.stderr.strip() or r.stdout.strip()}", "warn")
+                return
+
+            log(f"  ↑ publie sur GitHub Pages  ({time.strftime('%H:%M:%S')})", "ok")
+            log("    Le site en ligne sera mis a jour dans ~30 s", "dim")
+        except FileNotFoundError:
+            log("  ⚠ 'git' introuvable — installe Git pour la publication auto", "warn")
+        except Exception as e:
+            log(f"  ⚠ publication: {e}", "warn")
+
+
+def schedule_publish(delay=2.0):
+    """Planifie une publication dans `delay` secondes, debounce les appels rapproches."""
+    global _publish_timer
+    if not AUTO_PUBLISH:
+        return
+    if _publish_timer is not None:
+        _publish_timer.cancel()
+    _publish_timer = threading.Timer(delay, _do_publish)
+    _publish_timer.daemon = True
+    _publish_timer.start()
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -99,6 +171,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     json.dump(data, f, ensure_ascii=False, indent=2)
                 tmp.replace(CONTENT_FILE)
                 log(f"  ✓ content.json enregistré  ({time.strftime('%H:%M:%S')})", "ok")
+                schedule_publish()
                 return self._send_json(200, {"ok": True})
             except Exception as e:
                 log(f"  ✗ Erreur save: {e}", "err")
@@ -126,6 +199,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     f.write(raw_bytes)
                 rel = target.relative_to(ROOT).as_posix()
                 log(f"  ✓ image importée : {rel}", "ok")
+                schedule_publish()
                 return self._send_json(200, {"ok": True, "path": rel})
             except Exception as e:
                 log(f"  ✗ Erreur upload: {e}", "err")
@@ -164,9 +238,11 @@ def main():
     log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim")
     log("   PORTFOLIO  —  serveur local actif", "info")
     log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim")
-    log(f"   🌐  Site      : {url}", "ok")
-    log(f"   ✏️   Éditeur   : {admin_url}", "ok")
-    log(f"   📁  Dossier   : {ROOT}", "dim")
+    log(f"   🌐  Site local : {url}", "ok")
+    log(f"   ✏️   Éditeur    : {admin_url}", "ok")
+    log(f"   📁  Dossier    : {ROOT}", "dim")
+    if AUTO_PUBLISH:
+        log(f"   ↑  Auto-pub   : ON  (push GitHub a chaque sauvegarde)", "info")
     log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim")
     log("   Ctrl+C pour arrêter le serveur", "dim")
     print()
