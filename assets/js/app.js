@@ -415,6 +415,7 @@ if (location.protocol === 'file:') {
 
   /* ----------  WORK CARDS — 3D TILT + LIQUID  ---------- */
   function bindTilt() {
+    if (IS_TOUCH) return;
     $$('.work').forEach(card => {
       const media = card.querySelector('.work__media');
       const title = card.querySelector('.work__title');
