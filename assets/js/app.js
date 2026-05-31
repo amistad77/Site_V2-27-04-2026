@@ -309,6 +309,9 @@ if (location.protocol === 'file:') {
     const reveal = $('.hero__title--reveal');
     const lens = $('#lens');
     if (!wrap || !reveal || !lens) return;
+    // Sur tactile : pas de survol → on n'active pas la loupe. La phrase
+    // principale reste affichée proprement (la phrase secrète reste masquée).
+    if (IS_TOUCH) return;
 
     let active = false;
     let lensX = 0, lensY = 0;
