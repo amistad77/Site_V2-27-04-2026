@@ -1779,7 +1779,7 @@ if (location.protocol === 'file:') {
       initCompanion();
       initTidalCanvas();
       bindProjectScrub();
-      parallaxLoop();
+      if (!IS_TOUCH) parallaxLoop();
       bindRouterLinks();
       navigateTo(getRouteFromHash(), { skipTransition: true });
       updateScrollBG();
