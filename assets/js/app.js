@@ -215,7 +215,7 @@ if (location.protocol === 'file:') {
     if (cursor) cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
     requestAnimationFrame(cursorLoop);
   }
-  cursorLoop();
+  if (!IS_TOUCH) cursorLoop();
 
   function bindCursorInteractions(scope = document) {
     $$('a, button, [data-magnetic], .nav__tab, .filterbar__pill', scope).forEach(el => {
