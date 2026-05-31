@@ -401,6 +401,7 @@ if (location.protocol === 'file:') {
 
   /* ----------  MAGNETIC  ---------- */
   function bindMagnetic() {
+    if (IS_TOUCH) return;
     $$('[data-magnetic]').forEach(el => {
       el.addEventListener('mousemove', (e) => {
         const r = el.getBoundingClientRect();
