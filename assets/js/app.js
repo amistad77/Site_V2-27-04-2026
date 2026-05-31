@@ -68,14 +68,13 @@ if (location.protocol === 'file:') {
     }, 100);
   }
 
-  /* ----------  INTRO — BANDE DÉMO + SPLIT WIPE  ----------
+  /* ----------  INTRO — BANDE DÉMO (vidéo plein écran)  ----------
      Overlay fixe. Le scroll est bloqué pendant l'intro,
      wheel/touch fait avancer la progression.
      Phases (progress 0 → 1) :
-       0.00 → 0.25  : texte "Baptiste Dumoulin présente" s'efface
-       0.25 → 0.65  : la vidéo grandit cinéma → plein écran
-       0.65 → 1.00  : split-wipe — les 2 moitiés partent vers les côtés
-       = 1.00       : intro retirée → homepage
+       0.00 → 0.55  : vidéo plein écran, le voile sombre s'éclaircit
+       0.65 → 1.00  : sortie en fondu + léger zoom → homepage révélée
+       = 1.00       : intro retirée
   */
   function startIntro() {
     const intro = $('#intro');
