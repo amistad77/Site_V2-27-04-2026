@@ -1,0 +1,12 @@
+# Claude Code (local config, ne pas publier)
+.claude/
+
+# Fichiers temporaires
+*.tmp
+content.json.tmp
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
