@@ -116,21 +116,14 @@ if (location.protocol === 'file:') {
       const veilT = phase(progress, 0, 0.55);
       intro.style.setProperty('--intro-veil', lerp(0.35, 0, veilT).toFixed(3));
 
-      // --- Phase B : vidéo deja plein écran des le debut (pas d'expansion) ---
-      intro.style.setProperty('--intro-stage-w', '100vw');
-      intro.style.setProperty('--intro-stage-h', '100vh');
-      intro.style.setProperty('--intro-stage-radius', '0px');
-      intro.style.setProperty('--intro-half-shadow', 'none');
+      // --- Phase C : sortie en fondu + léger zoom (0.65 → 1.0) ---
+      // La vidéo s'estompe en zoomant légèrement, comme si on entrait dans la home.
+      const exitT = smooth(phase(progress, 0.65, 1.0));
+      intro.style.setProperty('--intro-stage-opacity', (1 - exitT).toFixed(3));
+      intro.style.setProperty('--intro-exit-scale', (1 + exitT * 0.12).toFixed(4));
 
-      // --- Phase C : split-wipe (0.65 → 1.0) — les moitiés partent ---
-      const splitT = smooth(phase(progress, 0.65, 1.0));
-      const splitX = (splitT * 110).toFixed(2); // % de la moitié — 110% = bien off-screen
-      intro.style.setProperty('--intro-split-l', `-${splitX}%`);
-      intro.style.setProperty('--intro-split-r', `${splitX}%`);
-
-      // Fond noir → transparent dès que le split commence (on voit la home
-      // apparaître entre les moitiés qui s'écartent, comme si on entrait dedans)
-      const bgT = phase(progress, 0.55, 0.75);
+      // Fond noir → transparent dès le milieu (on voit la home apparaître dessous)
+      const bgT = phase(progress, 0.55, 0.85);
       intro.style.setProperty('--intro-bg', (1 - bgT).toFixed(3));
 
       intro.style.setProperty('--intro-progress', (progress * 100).toFixed(1) + '%');
