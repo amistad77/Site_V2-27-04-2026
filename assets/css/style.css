@@ -1949,6 +1949,27 @@ body.is-ready .page.is-active { animation: pageIn .9s .2s cubic-bezier(.65,0,.35
   .companion { display: none; }
 }
 
+/* ==========================================================================
+   OPTIMISATION TACTILE (téléphone / tablette)
+   Désactive les effets pilotés à la souris (inutiles et coûteux sans souris)
+   et corrige quelques détails de mise en page. N'affecte PAS le bureau.
+   ========================================================================== */
+@media (hover: none), (pointer: coarse) {
+  /* Curseur personnalisé + couches d'effets au curseur : masqués sur tactile */
+  .cursor,
+  .tidal,
+  .hero__flock { display: none !important; }
+
+  /* La loupe ne fonctionne pas au toucher → on masque l'indication "hover the words" */
+  .hero__hint { display: none !important; }
+}
+
+/* Corrections de mise en page sur petit écran */
+@media (max-width: 720px) {
+  /* L'horloge déborde de la barre de navigation sur mobile → on la masque */
+  .nav__clock { display: none; }
+}
+
 /* ----- Category color wash overlay ----- */
 .cat-wash {
   position: fixed;
