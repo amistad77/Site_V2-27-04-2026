@@ -375,7 +375,7 @@ if (location.protocol === 'file:') {
     const hero = $('.hero');
     const group = $('#blobGroup');
     const svg = $('.wave-svg');
-    if (!hero || !group || PREFERS_REDUCED) return;
+    if (!hero || !group || PREFERS_REDUCED || IS_TOUCH) return;
 
     let tx = 0, ty = 0;
     let cx = 0, cy = 0;
