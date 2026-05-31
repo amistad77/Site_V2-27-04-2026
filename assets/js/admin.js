@@ -220,6 +220,75 @@ if (location.protocol === 'file:') {
     return item;
   }
 
+  /* ----------  GALLERY EDITOR (multi-images visuel)  ---------- */
+  function renderGalleryEditor(container, path) {
+    let arr = getPath(DATA, path);
+    if (!Array.isArray(arr)) { arr = []; setPath(DATA, path, arr); }
+    container.innerHTML = '';
+
+    const grid = document.createElement('div');
+    grid.className = 'gallery-editor__grid';
+
+    arr.forEach((src, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'gallery-editor__cell';
+      const media = isVideo(src)
+        ? `<video src="${escapeAttr(src)}" muted></video>`
+        : `<img src="${escapeAttr(src)}" alt="" loading="lazy" />`;
+      cell.innerHTML = `
+        ${media}
+        ${i === 0 ? '<span class="gallery-editor__badge">En-tête</span>' : ''}
+        <div class="gallery-editor__actions">
+          <button type="button" data-up title="Déplacer à gauche" ${i === 0 ? 'disabled' : ''}>←</button>
+          <button type="button" data-down title="Déplacer à droite" ${i === arr.length - 1 ? 'disabled' : ''}>→</button>
+          <button type="button" data-del title="Retirer">✕</button>
+        </div>
+      `;
+      cell.querySelector('[data-del]').addEventListener('click', () => {
+        arr.splice(i, 1); markDirty(); renderGalleryEditor(container, path);
+      });
+      cell.querySelector('[data-up]').addEventListener('click', () => {
+        if (i > 0) { [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; markDirty(); renderGalleryEditor(container, path); }
+      });
+      cell.querySelector('[data-down]').addEventListener('click', () => {
+        if (i < arr.length - 1) { [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; markDirty(); renderGalleryEditor(container, path); }
+      });
+      grid.appendChild(cell);
+    });
+    container.appendChild(grid);
+
+    if (arr.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'gallery-editor__empty';
+      empty.textContent = 'Aucune image — ajoutez-en depuis votre médiathèque.';
+      container.appendChild(empty);
+    }
+
+    const row = document.createElement('div');
+    row.className = 'gallery-editor__add-row';
+
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn--add';
+    addBtn.textContent = '+ Ajouter depuis la médiathèque';
+    addBtn.addEventListener('click', () => openPicker((src) => {
+      arr.push(src); markDirty(); renderGalleryEditor(container, path);
+    }));
+
+    const urlBtn = document.createElement('button');
+    urlBtn.type = 'button';
+    urlBtn.className = 'gallery-editor__url';
+    urlBtn.textContent = 'ou coller une URL';
+    urlBtn.addEventListener('click', () => {
+      const url = prompt('Collez l\'URL ou le chemin de l\'image :');
+      if (url && url.trim()) { arr.push(url.trim()); markDirty(); renderGalleryEditor(container, path); }
+    });
+
+    row.appendChild(addBtn);
+    row.appendChild(urlBtn);
+    container.appendChild(row);
+  }
+
   function bindAddButtons() {
     $$('[data-add]').forEach(btn => {
       btn.addEventListener('click', () => {
