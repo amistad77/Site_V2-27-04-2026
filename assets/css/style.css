@@ -214,10 +214,10 @@ body.intro-locked .page.is-active {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: var(--intro-stage-w, 90vw);
-  height: var(--intro-stage-h, 65vh);
+  width: var(--intro-stage-w, 100vw);
+  height: var(--intro-stage-h, 100vh);
   transform: translate(-50%, -50%);
-  border-radius: var(--intro-stage-radius, 16px);
+  border-radius: var(--intro-stage-radius, 0px);
   /* Pas d'overflow:hidden ici — sinon les moitiés ne peuvent pas glisser
      hors du stage durant le split. On clip plutôt à l'intérieur de chaque moitié. */
   z-index: 1;
