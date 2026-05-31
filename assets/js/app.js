@@ -85,22 +85,10 @@ if (location.protocol === 'file:') {
       return;
     }
 
-    const videoL = $('#introHalfVideoL');
-    const videoR = $('#introHalfVideoR');
+    const video = $('#introVideo');
 
-    // Démarre la lecture des deux moitiés
-    [videoL, videoR].forEach(v => { try { v && v.play().catch(() => {}); } catch (e) {} });
-
-    // Sync périodique pour que la couture G/D reste invisible
-    function syncVideos() {
-      if (videoL && videoR && videoL.readyState >= 2 && videoR.readyState >= 2) {
-        const drift = Math.abs(videoL.currentTime - videoR.currentTime);
-        if (drift > 0.12) {
-          try { videoR.currentTime = videoL.currentTime; } catch (e) {}
-        }
-      }
-    }
-    const syncTimer = setInterval(syncVideos, 750);
+    // Démarre la lecture de la vidéo plein écran
+    try { video && video.play().catch(() => {}); } catch (e) {}
 
     document.body.classList.add('intro-locked');
     // Petit délai pour permettre au navigateur de reflow avant le fondu d'apparition
