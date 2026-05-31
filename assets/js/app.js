@@ -30,7 +30,7 @@ if (location.protocol === 'file:') {
   const PREFERS_REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* Tactile (téléphone/tablette) : pas de souris → on désactive les effets
      pilotés au curseur pour garder le site fluide. Le desktop n'est PAS affecté. */
-  const IS_TOUCH = matchMedia('(hover: none), (pointer: coarse)').matches || window.__FORCE_TOUCH__ === true;
+  const IS_TOUCH = matchMedia('(hover: none), (pointer: coarse)').matches || localStorage.getItem('__forceTouch__') === '1';
   if (IS_TOUCH) document.documentElement.classList.add('is-touch');
 
   /* ----------  LOADER  ---------- */
