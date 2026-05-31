@@ -1962,6 +1962,16 @@ body.is-ready .page.is-active { animation: pageIn .9s .2s cubic-bezier(.65,0,.35
 
   /* La loupe ne fonctionne pas au toucher → on masque l'indication "hover the words" */
   .hero__hint { display: none !important; }
+
+  /* Fond du hero : on FIGE les dégradés qui ondulent (4 blobs animés en continu
+     + filtres = très coûteux en GPU sur mobile). Ils restent visibles et jolis,
+     mais ne se recalculent plus 60×/seconde → fin du lag. */
+  .blob { animation: none !important; }
+  .hero__waves-grain { display: none; }     /* overlay grain (mix-blend) inutile sur mobile */
+
+  /* Bandeaux de texte défilant : figés sur tactile (transform en boucle) */
+  .marquee__track,
+  .hero__ticker-track { animation: none !important; }
 }
 
 /* Corrections de mise en page sur petit écran */
