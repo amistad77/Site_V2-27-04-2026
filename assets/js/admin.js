@@ -195,6 +195,14 @@ if (location.protocol === 'file:') {
       }));
     });
 
+    // Gallery editors (multi-images) — chemin complet arr[index].gallery
+    $$('[data-gallery]', item).forEach(g => {
+      const sub = g.dataset.gallery;
+      const full = `${path}.${index}.${sub}`;
+      g.dataset.gallery = full;
+      renderGalleryEditor(g, full);
+    });
+
     // Remove button
     const removeBtn = item.querySelector('[data-remove]');
     if (removeBtn) {
