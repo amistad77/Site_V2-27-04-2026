@@ -1459,7 +1459,7 @@ if (location.protocol === 'file:') {
      Inspired by the wildlife-photo + 3D theme. */
   function initHeroFlock() {
     const canvas = $('#heroFlock');
-    if (!canvas || PREFERS_REDUCED) return;
+    if (!canvas || PREFERS_REDUCED || IS_TOUCH) return;
     const hero = $('.hero');
     if (!hero) return;
     const ctx = canvas.getContext('2d');
