@@ -209,58 +209,30 @@ body.intro-locked .page.is-active {
   pointer-events: none;
 }
 
-/* --- Stage vidéo : grandit cinéma → plein écran --- */
+/* --- Stage vidéo : plein écran, sortie en fondu + léger zoom --- */
 .intro__stage {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: var(--intro-stage-w, 100vw);
-  height: var(--intro-stage-h, 100vh);
-  transform: translate(-50%, -50%);
-  border-radius: var(--intro-stage-radius, 0px);
-  /* Pas d'overflow:hidden ici — sinon les moitiés ne peuvent pas glisser
-     hors du stage durant le split. On clip plutôt à l'intérieur de chaque moitié. */
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%) scale(var(--intro-exit-scale, 1));
+  opacity: var(--intro-stage-opacity, 1);
   z-index: 1;
+  overflow: hidden;
+  will-change: transform, opacity;
 }
 
-/* --- Les deux moitiés : se splittent latéralement en fin d'anim --- */
-.intro__half {
+/* --- Vidéo unique plein écran (object-fit: cover = pas de bandes noires,
+       fonctionne sur toutes les cartes graphiques) --- */
+.intro__video {
   position: absolute;
-  top: 0;
-  height: 100%;
-  width: 50%;
-  overflow: hidden;
-  background: #000;
-  will-change: transform;
-  border-radius: inherit;
-}
-.intro__half--left {
-  left: 0;
-  transform: translate3d(var(--intro-split-l, 0%), 0, 0);
-  /* Conserve les coins arrondis seulement à gauche */
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: var(--intro-half-shadow, 0 30px 80px -20px rgba(0,0,0,.6));
-}
-.intro__half--right {
-  right: 0;
-  transform: translate3d(var(--intro-split-r, 0%), 0, 0);
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  box-shadow: var(--intro-half-shadow, 0 30px 80px -20px rgba(0,0,0,.6));
-}
-/* Chaque vidéo prend 200% de la moitié = 100% du stage, positionnée pour
-   ne montrer que sa moitié naturelle (gauche ou droite) du plan. */
-.intro__half-video {
-  position: absolute;
-  top: 0;
-  width: 200%;
+  inset: 0;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
-.intro__half--left .intro__half-video { left: 0; }
-.intro__half--right .intro__half-video { right: 0; }
 
 .intro__veil {
   position: absolute;
