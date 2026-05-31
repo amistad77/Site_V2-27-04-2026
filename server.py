@@ -35,6 +35,12 @@ _publish_lock = threading.Lock()
 _publish_pending = threading.Event()
 _publish_timer = None
 
+# File watcher : surveille tous les fichiers et publie en cas de changement
+WATCH_INTERVAL = 2.0  # secondes entre 2 scans
+WATCH_IGNORE_DIRS = {".git", ".claude", ".github", "__pycache__", "_refs", "node_modules", ".vscode", ".idea"}
+WATCH_IGNORE_SUFFIXES = {".tmp", ".pyc", ".swp", ".swo", ".log"}
+WATCH_IGNORE_NAMES = {"content.json.tmp", "Thumbs.db", ".DS_Store"}
+
 
 def log(msg, color=""):
     colors = {
@@ -56,6 +62,23 @@ def _git(*args, capture=True):
     )
 
 
+GITHUB_FILE_LIMIT = 100 * 1024 * 1024  # 100 MB
+
+
+def _check_oversized_files():
+    """Renvoie la liste [(chemin, taille_octets)] des fichiers > 100MB qui
+    seraient bloques par GitHub."""
+    big = []
+    for p in _walk_watched():
+        try:
+            size = p.stat().st_size
+            if size > GITHUB_FILE_LIMIT:
+                big.append((p.relative_to(ROOT).as_posix(), size))
+        except OSError:
+            pass
+    return big
+
+
 def _do_publish():
     """Commit + push toutes les modifications locales sur GitHub.
     Appelee dans un thread de fond, throttlee (au plus 1 push toutes les 3 s)."""
@@ -71,6 +94,15 @@ def _do_publish():
             r = _git("remote", "get-url", "origin")
             if r.returncode != 0 or not r.stdout.strip():
                 log("  ⚠ pas de remote 'origin', publication ignoree", "warn")
+                return
+
+            # Garde-fou : refus si un fichier depasse la limite GitHub (100 MB)
+            big = _check_oversized_files()
+            if big:
+                log("  ⚠ Publication bloquee : fichier(s) trop volumineux pour GitHub :", "warn")
+                for path, size in big:
+                    log(f"     • {path}  ({size/1024/1024:.1f} MB > 100 MB)", "warn")
+                log("    Compressez le(s) fichier(s) puis sauvegardez à nouveau.", "dim")
                 return
 
             # Stage tout
@@ -109,6 +141,63 @@ def schedule_publish(delay=2.0):
     _publish_timer = threading.Timer(delay, _do_publish)
     _publish_timer.daemon = True
     _publish_timer.start()
+
+
+def _walk_watched():
+    """Itere sur tous les fichiers a surveiller (en ignorant .git, tmp, etc.)."""
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        # Filtre les sous-dossiers a ignorer (modifie dirnames in-place)
+        dirnames[:] = [
+            d for d in dirnames
+            if d not in WATCH_IGNORE_DIRS and not d.startswith(".")
+        ]
+        for fn in filenames:
+            if fn in WATCH_IGNORE_NAMES:
+                continue
+            if any(fn.endswith(s) for s in WATCH_IGNORE_SUFFIXES):
+                continue
+            yield Path(dirpath) / fn
+
+
+def _snapshot():
+    """Renvoie {chemin: mtime} pour tous les fichiers surveilles."""
+    snap = {}
+    for p in _walk_watched():
+        try:
+            snap[str(p)] = p.stat().st_mtime
+        except OSError:
+            pass
+    return snap
+
+
+def file_watcher():
+    """Thread de fond : surveille tous les fichiers et planifie un push au moindre changement.
+
+    Modifie le contenu via admin.html OU en editant directement les fichiers OU en
+    remplacant la video, peu importe — le watcher detecte et publie.
+    """
+    if not AUTO_PUBLISH:
+        return
+    previous = _snapshot()
+    log(f"   👁  Watcher    : surveillance de {len(previous)} fichiers", "dim")
+    while True:
+        time.sleep(WATCH_INTERVAL)
+        try:
+            current = _snapshot()
+            if current != previous:
+                # Calcule un resume des changements pour le log
+                added = set(current) - set(previous)
+                removed = set(previous) - set(current)
+                modified = {k for k in current.keys() & previous.keys() if current[k] != previous[k]}
+                changes = []
+                if added: changes.append(f"+{len(added)}")
+                if removed: changes.append(f"-{len(removed)}")
+                if modified: changes.append(f"~{len(modified)}")
+                log(f"  📝 changement detecte ({', '.join(changes)})", "info")
+                previous = current
+                schedule_publish()
+        except Exception as e:
+            log(f"  ⚠ watcher: {e}", "warn")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -242,10 +331,15 @@ def main():
     log(f"   ✏️   Éditeur    : {admin_url}", "ok")
     log(f"   📁  Dossier    : {ROOT}", "dim")
     if AUTO_PUBLISH:
-        log(f"   ↑  Auto-pub   : ON  (push GitHub a chaque sauvegarde)", "info")
+        log(f"   ↑  Auto-pub   : ON  (push GitHub a chaque modif)", "info")
     log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim")
     log("   Ctrl+C pour arrêter le serveur", "dim")
     print()
+
+    # Lance le watcher de fichiers en arriere-plan
+    if AUTO_PUBLISH:
+        watcher_thread = threading.Thread(target=file_watcher, daemon=True)
+        watcher_thread.start()
 
     threading.Timer(0.8, lambda: webbrowser.open(url)).start()
     try:

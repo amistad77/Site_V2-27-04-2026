@@ -103,6 +103,11 @@ Ce dossier contient tout votre site, votre éditeur et votre contenu.
       le serveur pousse automatiquement les changements vers
       GitHub. Le site en ligne se met à jour en ~30 secondes.
 
+    ▸ Le serveur surveille AUSSI tout le dossier en direct :
+      si vous modifiez index.html, remplacez la vidéo
+      d'accueil, ou changez du CSS — le push est automatique
+      dès que vous sauvegardez le fichier (délai ~2 s).
+
     ▸ Vous n'avez RIEN à faire — c'est entièrement automatisé.
 
     ◆ Première activation (à faire UNE seule fois) :
