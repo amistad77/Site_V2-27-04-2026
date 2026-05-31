@@ -250,7 +250,7 @@ if (location.protocol === 'file:') {
   let tidalActive = true;
   function initTidalCanvas() {
     const canvas = $('#tidal');
-    if (!canvas || PREFERS_REDUCED) return;
+    if (!canvas || PREFERS_REDUCED || IS_TOUCH) return;
     const ctx = canvas.getContext('2d');
     const dpr = Math.max(1, Math.min(2, devicePixelRatio || 1));
     const ripples = [];
