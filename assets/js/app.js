@@ -119,16 +119,11 @@
       const veilT = phase(progress, 0, 0.55);
       intro.style.setProperty('--intro-veil', lerp(0.35, 0, veilT).toFixed(3));
 
-      // --- Phase B : ouverture cinéma → plein écran (0.25 → 0.65) ---
-      const expandT = phase(progress, 0.25, 0.65);
-      const eT = 1 - Math.pow(1 - expandT, 3); // ease-out cubique
-      const startW = isMobile() ? 96 : 90;
-      const startH = isMobile() ? 55 : 65;
-      intro.style.setProperty('--intro-stage-w', lerp(startW, 100, eT).toFixed(2) + 'vw');
-      intro.style.setProperty('--intro-stage-h', lerp(startH, 100, eT).toFixed(2) + 'vh');
-      intro.style.setProperty('--intro-stage-radius', lerp(16, 0, eT).toFixed(1) + 'px');
-      intro.style.setProperty('--intro-half-shadow',
-        `0 ${(30 * (1 - eT)).toFixed(0)}px 80px -20px rgba(0,0,0,${(0.6 * (1 - eT)).toFixed(2)})`);
+      // --- Phase B : vidéo deja plein écran des le debut (pas d'expansion) ---
+      intro.style.setProperty('--intro-stage-w', '100vw');
+      intro.style.setProperty('--intro-stage-h', '100vh');
+      intro.style.setProperty('--intro-stage-radius', '0px');
+      intro.style.setProperty('--intro-half-shadow', 'none');
 
       // --- Phase C : split-wipe (0.65 → 1.0) — les moitiés partent ---
       const splitT = smooth(phase(progress, 0.65, 1.0));
