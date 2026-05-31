@@ -1968,6 +1968,12 @@ body.is-ready .page.is-active { animation: pageIn .9s .2s cubic-bezier(.65,0,.35
 @media (max-width: 720px) {
   /* L'horloge déborde de la barre de navigation sur mobile → on la masque */
   .nav__clock { display: none; }
+
+  /* Ticker du hero : sur mobile, on masque le label statique "CURRENTLY —"
+     (sinon la piste défilante le chevauche) et on laisse la piste pleine largeur */
+  .hero__ticker-pulse,
+  .hero__ticker-label,
+  .hero__ticker-sep { display: none; }
 }
 
 /* ----- Category color wash overlay ----- */
